@@ -3,13 +3,9 @@
   "info": {
     "title": "Candidate Profile API",
     "version": "1.0.0",
-    "description": "Personal candidate profile API for local testing in Postman and future publishing to a developer portal."
+    "description": "Personal candidate profile API published at api.jonahanderson.me."
   },
   "servers": [
-    {
-      "url": "http://localhost:3000",
-      "description": "Local development"
-    },
     {
       "url": "https://api.jonahanderson.me",
       "description": "Production"
