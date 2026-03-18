@@ -22,9 +22,6 @@
       "name": "Projects"
     },
     {
-      "name": "Availability"
-    },
-    {
       "name": "Resume"
     },
     {
@@ -314,14 +311,14 @@
         }
       }
     },
-    "/availability": {
+    "/contact/availability": {
       "get": {
         "tags": [
-          "Availability"
+          "Contact"
         ],
-        "summary": "Get availability status",
+        "summary": "Get contact availability",
         "description": "Returns the current availability status. The example response below is illustrative only.",
-        "operationId": "getAvailability",
+        "operationId": "getContactAvailability",
         "responses": {
           "200": {
             "description": "Availability status.",
@@ -335,7 +332,7 @@
                     "summary": "Illustrative response",
                     "description": "Sample values only. Live availability data will vary.",
                     "value": {
-                      "status": "open_to_opportunities"
+                      "status": "example availability"
                     }
                   }
                 }
@@ -904,11 +901,11 @@
           "status": {
             "type": "string",
             "description": "Availability status string used by the client application.",
-            "example": "open_to_opportunities"
+            "example": "example availability"
           }
         },
         "example": {
-          "status": "open_to_opportunities"
+          "status": "example availability"
         }
       },
       "ResumeExperience": {

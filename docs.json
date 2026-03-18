@@ -42,12 +42,6 @@
             ]
           },
           {
-            "group": "Availability",
-            "pages": [
-              "api-reference/endpoint/availability"
-            ]
-          },
-          {
             "group": "Resume",
             "pages": [
               "api-reference/endpoint/resume"
@@ -56,6 +50,7 @@
           {
             "group": "Contact",
             "pages": [
+              "api-reference/endpoint/availability",
               "api-reference/endpoint/contact"
             ]
           }
