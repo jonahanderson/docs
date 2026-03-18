@@ -288,7 +288,6 @@
                       "id": "project_example_001",
                       "name": "Project Atlas",
                       "summary": "Example summary for a customer-facing workflow automation product.",
-                      "description": "Example longer description showing the kind of detail the endpoint can return for a single project.",
                       "tags": [
                         "Workflow automation",
                         "API integration",
@@ -833,7 +832,6 @@
           "id",
           "name",
           "summary",
-          "description",
           "links"
         ],
         "properties": {
@@ -851,11 +849,6 @@
             "type": "string",
             "description": "Short summary of what the project is or does.",
             "example": "Example summary for a customer-facing workflow automation product."
-          },
-          "description": {
-            "type": "string",
-            "description": "Longer description used on the project detail view.",
-            "example": "Example longer description showing the kind of detail the endpoint can return for a single project."
           },
           "tags": {
             "type": "array",
@@ -878,7 +871,6 @@
           "id": "project_example_001",
           "name": "Project Atlas",
           "summary": "Example summary for a customer-facing workflow automation product.",
-          "description": "Example longer description showing the kind of detail the endpoint can return for a single project.",
           "tags": [
             "Workflow automation",
             "API integration",
