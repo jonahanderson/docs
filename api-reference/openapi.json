@@ -3,7 +3,7 @@
   "info": {
     "title": "Candidate Profile API",
     "version": "1.0.0",
-    "description": "Personal candidate profile API published at api.jonahanderson.me."
+    "description": "Personal candidate profile API published at api.jonahanderson.me. All example payloads in this spec are illustrative and do not represent live data."
   },
   "servers": [
     {
@@ -38,14 +38,34 @@
           "Candidate"
         ],
         "summary": "Get candidate profile",
+        "description": "Returns the top-level candidate profile. The example response below is illustrative only.",
         "operationId": "getCandidate",
         "responses": {
           "200": {
-            "description": "Candidate profile",
+            "description": "Candidate profile.",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Candidate"
+                },
+                "examples": {
+                  "illustrativeResponse": {
+                    "summary": "Illustrative response",
+                    "description": "Sample values only. Live profile data will vary.",
+                    "value": {
+                      "id": "candidate_example_001",
+                      "name": "Example Candidate",
+                      "title": "Senior Product Manager",
+                      "location": "Remote, US",
+                      "summary": "Example summary describing product strategy, integrations, and cross-functional leadership.",
+                      "years_experience": 8,
+                      "domains": [
+                        "API platforms",
+                        "Integrations",
+                        "B2B SaaS"
+                      ]
+                    }
+                  }
                 }
               }
             }
@@ -59,27 +79,80 @@
           "Experience"
         ],
         "summary": "List experience entries",
+        "description": "Returns experience entries for the candidate profile. The example response below is illustrative only.",
         "operationId": "listExperience",
         "parameters": [
           {
             "in": "query",
             "name": "current",
+            "required": false,
+            "description": "Filters the response by whether the experience is current.",
             "schema": {
               "type": "boolean"
             },
-            "required": false,
-            "description": "When supplied, filters the response by current role status."
+            "examples": {
+              "currentOnly": {
+                "summary": "Current entries only",
+                "value": true
+              }
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Experience list",
+            "description": "Experience list.",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/Experience"
+                  }
+                },
+                "examples": {
+                  "illustrativeResponse": {
+                    "summary": "Illustrative response",
+                    "description": "Sample values only. Live experience data will vary.",
+                    "value": [
+                      {
+                        "id": "experience_example_001",
+                        "company": "Sample Systems",
+                        "company_start_date": "2023-01-01",
+                        "company_end_date": null,
+                        "current": true,
+                        "summary": "Example summary for a current role focused on integrations, platform workflows, and partner enablement.",
+                        "roles": [
+                          {
+                            "title": "Senior Product Manager",
+                            "start_date": "2024-01-01",
+                            "end_date": null,
+                            "accomplishments": [
+                              "Defined an example roadmap for partner-facing API improvements.",
+                              "Coordinated an example cross-functional launch for a workflow automation feature."
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "id": "experience_example_002",
+                        "company": "Example Labs",
+                        "company_start_date": "2021-01-01",
+                        "company_end_date": "2022-12-31",
+                        "current": false,
+                        "summary": "Example summary for a previous role covering customer data pipelines and platform reliability.",
+                        "roles": [
+                          {
+                            "title": "Product Manager",
+                            "start_date": "2021-01-01",
+                            "end_date": "2022-12-31",
+                            "accomplishments": [
+                              "Owned an example product area spanning ingestion, partner setup, and reporting.",
+                              "Delivered an example improvement to internal tooling that reduced setup time."
+                            ]
+                          }
+                        ]
+                      }
+                    ]
                   }
                 }
               }
@@ -97,6 +170,7 @@
           "Experience"
         ],
         "summary": "Get a single experience entry",
+        "description": "Returns one experience entry by id. The example response below is illustrative only.",
         "operationId": "getExperienceById",
         "parameters": [
           {
@@ -105,11 +179,36 @@
         ],
         "responses": {
           "200": {
-            "description": "Experience item",
+            "description": "Experience item.",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Experience"
+                },
+                "examples": {
+                  "illustrativeResponse": {
+                    "summary": "Illustrative response",
+                    "description": "Sample values only. Live experience data will vary.",
+                    "value": {
+                      "id": "experience_example_001",
+                      "company": "Sample Systems",
+                      "company_start_date": "2023-01-01",
+                      "company_end_date": null,
+                      "current": true,
+                      "summary": "Example summary for a current role focused on integrations, platform workflows, and partner enablement.",
+                      "roles": [
+                        {
+                          "title": "Senior Product Manager",
+                          "start_date": "2024-01-01",
+                          "end_date": null,
+                          "accomplishments": [
+                            "Defined an example roadmap for partner-facing API improvements.",
+                            "Coordinated an example cross-functional launch for a workflow automation feature."
+                          ]
+                        }
+                      ]
+                    }
+                  }
                 }
               }
             }
@@ -126,16 +225,35 @@
           "Projects"
         ],
         "summary": "List projects",
+        "description": "Returns project summaries. The example response below is illustrative only.",
         "operationId": "listProjects",
         "responses": {
           "200": {
-            "description": "Project list",
+            "description": "Project list.",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/ProjectSummary"
+                  }
+                },
+                "examples": {
+                  "illustrativeResponse": {
+                    "summary": "Illustrative response",
+                    "description": "Sample values only. Live project data will vary.",
+                    "value": [
+                      {
+                        "id": "project_example_001",
+                        "name": "Project Atlas",
+                        "summary": "Example summary for a customer-facing workflow automation product."
+                      },
+                      {
+                        "id": "project_example_002",
+                        "name": "Signal Console",
+                        "summary": "Example summary for an internal dashboard used to monitor integration health."
+                      }
+                    ]
                   }
                 }
               }
@@ -150,6 +268,7 @@
           "Projects"
         ],
         "summary": "Get a single project",
+        "description": "Returns one project by id. The example response below is illustrative only.",
         "operationId": "getProjectById",
         "parameters": [
           {
@@ -158,11 +277,33 @@
         ],
         "responses": {
           "200": {
-            "description": "Project detail",
+            "description": "Project detail.",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Project"
+                },
+                "examples": {
+                  "illustrativeResponse": {
+                    "summary": "Illustrative response",
+                    "description": "Sample values only. Live project data will vary.",
+                    "value": {
+                      "id": "project_example_001",
+                      "name": "Project Atlas",
+                      "summary": "Example summary for a customer-facing workflow automation product.",
+                      "description": "Example longer description showing the kind of detail the endpoint can return for a single project.",
+                      "tags": [
+                        "Workflow automation",
+                        "API integration",
+                        "Example tag"
+                      ],
+                      "links": {
+                        "github": "https://example.com/project-atlas/repository",
+                        "live": "https://example.com/project-atlas",
+                        "details": "https://example.com/projects/project-atlas"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -179,14 +320,24 @@
           "Availability"
         ],
         "summary": "Get availability status",
+        "description": "Returns the current availability status. The example response below is illustrative only.",
         "operationId": "getAvailability",
         "responses": {
           "200": {
-            "description": "Availability status",
+            "description": "Availability status.",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Availability"
+                },
+                "examples": {
+                  "illustrativeResponse": {
+                    "summary": "Illustrative response",
+                    "description": "Sample values only. Live availability data will vary.",
+                    "value": {
+                      "status": "open_to_opportunities"
+                    }
+                  }
                 }
               }
             }
@@ -200,12 +351,14 @@
           "Resume"
         ],
         "summary": "Get resume data or PDF link",
+        "description": "Returns either structured resume data or a PDF URL, depending on the requested format. The example responses below are illustrative only.",
         "operationId": "getResume",
         "parameters": [
           {
             "in": "query",
             "name": "format",
             "required": false,
+            "description": "Controls whether the endpoint returns structured JSON or a JSON object containing a PDF URL.",
             "schema": {
               "type": "string",
               "enum": [
@@ -213,12 +366,22 @@
                 "pdf"
               ],
               "default": "json"
+            },
+            "examples": {
+              "jsonFormat": {
+                "summary": "Structured JSON response",
+                "value": "json"
+              },
+              "pdfFormat": {
+                "summary": "PDF URL response",
+                "value": "pdf"
+              }
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resume response",
+            "description": "Resume response.",
             "content": {
               "application/json": {
                 "schema": {
@@ -230,6 +393,47 @@
                       "$ref": "#/components/schemas/ResumePdf"
                     }
                   ]
+                },
+                "examples": {
+                  "illustrativeJsonResponse": {
+                    "summary": "Illustrative JSON response",
+                    "description": "Sample values only. Live resume data will vary.",
+                    "value": {
+                      "name": "Example Candidate",
+                      "title": "Senior Product Manager",
+                      "experience": [
+                        {
+                          "company": "Sample Systems",
+                          "company_start_date": "2023-01-01",
+                          "company_end_date": null,
+                          "current": true,
+                          "roles": [
+                            {
+                              "title": "Senior Product Manager",
+                              "start_date": "2024-01-01",
+                              "end_date": null,
+                              "accomplishments": [
+                                "Defined an example roadmap for partner-facing API improvements.",
+                                "Coordinated an example cross-functional launch for a workflow automation feature."
+                              ]
+                            }
+                          ]
+                        }
+                      ],
+                      "skills": [
+                        "API strategy",
+                        "Partner integrations",
+                        "Product discovery"
+                      ]
+                    }
+                  },
+                  "illustrativePdfResponse": {
+                    "summary": "Illustrative PDF response",
+                    "description": "Sample values only. Live resume data will vary.",
+                    "value": {
+                      "url": "https://example.com/resume/example-candidate.pdf"
+                    }
+                  }
                 }
               }
             }
@@ -246,6 +450,7 @@
           "Contact"
         ],
         "summary": "Submit a contact request",
+        "description": "Submits an inbound contact request. The example request and response below are illustrative only.",
         "operationId": "createContact",
         "requestBody": {
           "required": true,
@@ -253,17 +458,39 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/ContactRequest"
+              },
+              "examples": {
+                "illustrativeRequest": {
+                  "summary": "Illustrative request",
+                  "description": "Sample values only. Live requests will vary.",
+                  "value": {
+                    "name": "Avery Lee",
+                    "email": "avery.lee@example.com",
+                    "company": "Example Ventures",
+                    "message": "I would love to schedule time to talk about a product leadership role."
+                  }
+                }
               }
             }
           }
         },
         "responses": {
           "201": {
-            "description": "Contact request accepted",
+            "description": "Contact request accepted.",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ContactResponse"
+                },
+                "examples": {
+                  "illustrativeResponse": {
+                    "summary": "Illustrative response",
+                    "description": "Sample values only. Live response data will vary.",
+                    "value": {
+                      "id": "contact_example_001",
+                      "status": "received"
+                    }
+                  }
                 }
               }
             }
@@ -281,28 +508,63 @@
         "in": "path",
         "name": "id",
         "required": true,
+        "description": "The resource identifier returned by a list endpoint.",
         "schema": {
           "type": "string"
+        },
+        "examples": {
+          "experienceId": {
+            "summary": "Experience id example",
+            "value": "experience_example_001"
+          },
+          "projectId": {
+            "summary": "Project id example",
+            "value": "project_example_001"
+          }
         }
       }
     },
     "responses": {
       "BadRequest": {
-        "description": "Invalid request",
+        "description": "Invalid request.",
         "content": {
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "examples": {
+              "illustrativeResponse": {
+                "summary": "Illustrative validation error",
+                "description": "Sample values only. Live error messages will vary.",
+                "value": {
+                  "error": {
+                    "code": "BAD_REQUEST",
+                    "message": "The request payload is missing a required field."
+                  }
+                }
+              }
             }
           }
         }
       },
       "NotFound": {
-        "description": "Resource not found",
+        "description": "Resource not found.",
         "content": {
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "examples": {
+              "illustrativeResponse": {
+                "summary": "Illustrative not found error",
+                "description": "Sample values only. Live error messages will vary.",
+                "value": {
+                  "error": {
+                    "code": "NOT_FOUND",
+                    "message": "The requested resource could not be found."
+                  }
+                }
+              }
             }
           }
         }
@@ -311,6 +573,7 @@
     "schemas": {
       "Candidate": {
         "type": "object",
+        "description": "Top-level candidate profile returned by the API.",
         "required": [
           "id",
           "name",
@@ -323,45 +586,65 @@
         "properties": {
           "id": {
             "type": "string",
-            "example": "cand_001"
+            "description": "Stable identifier for the candidate profile.",
+            "example": "candidate_example_001"
           },
           "name": {
             "type": "string",
-            "example": "Jonah Anderson"
+            "description": "Display name shown for the candidate.",
+            "example": "Example Candidate"
           },
           "title": {
             "type": "string",
-            "example": "Senior Product Manager, Integrations"
+            "description": "Primary professional title for the candidate.",
+            "example": "Senior Product Manager"
           },
           "location": {
             "type": "string",
-            "example": "Brooklyn, New York"
+            "description": "Current location or region for the candidate.",
+            "example": "Remote, US"
           },
           "summary": {
             "type": "string",
-            "example": "Technical product leader focused on APIs, integrations, and partner platforms"
+            "description": "Short professional summary used in the profile.",
+            "example": "Example summary describing product strategy, integrations, and cross-functional leadership."
           },
           "years_experience": {
             "type": "integer",
-            "example": 5
+            "description": "Approximate number of years of professional experience.",
+            "example": 8
           },
           "domains": {
             "type": "array",
+            "description": "Areas of expertise or industries associated with the candidate.",
             "items": {
-              "type": "string"
+              "type": "string",
+              "description": "One domain or specialization."
             },
             "example": [
-              "APIs",
+              "API platforms",
               "Integrations",
-              "Logistics",
-              "Fintech",
               "B2B SaaS"
             ]
           }
+        },
+        "example": {
+          "id": "candidate_example_001",
+          "name": "Example Candidate",
+          "title": "Senior Product Manager",
+          "location": "Remote, US",
+          "summary": "Example summary describing product strategy, integrations, and cross-functional leadership.",
+          "years_experience": 8,
+          "domains": [
+            "API platforms",
+            "Integrations",
+            "B2B SaaS"
+          ]
         }
       },
       "Experience": {
         "type": "object",
+        "description": "A company-level experience entry, including one or more roles held there.",
         "required": [
           "id",
           "company",
@@ -373,16 +656,19 @@
         "properties": {
           "id": {
             "type": "string",
-            "example": "exp_dat"
+            "description": "Stable identifier for the experience entry.",
+            "example": "experience_example_001"
           },
           "company": {
             "type": "string",
-            "example": "Qualtrics"
+            "description": "Company or organization name for the experience entry.",
+            "example": "Sample Systems"
           },
           "company_start_date": {
             "type": "string",
             "format": "date",
-            "example": "2020-11-01"
+            "description": "Date when the candidate started working with the company.",
+            "example": "2023-01-01"
           },
           "company_end_date": {
             "type": [
@@ -390,26 +676,50 @@
               "null"
             ],
             "format": "date",
-            "example": "2023-05-31"
+            "description": "Date when the candidate stopped working with the company, or `null` if it is current.",
+            "example": null
           },
           "current": {
             "type": "boolean",
-            "example": false
+            "description": "Whether this experience entry represents a current company.",
+            "example": true
           },
           "summary": {
             "type": "string",
-            "example": "Led third-party integration strategy, customer data pipeline delivery, ingestion scale improvements, and migration work across the Qualtrics platform."
+            "description": "Short summary of the work completed at the company.",
+            "example": "Example summary for a current role focused on integrations, platform workflows, and partner enablement."
           },
           "roles": {
             "type": "array",
+            "description": "Roles held within this company experience.",
             "items": {
               "$ref": "#/components/schemas/ExperienceRole"
             }
           }
+        },
+        "example": {
+          "id": "experience_example_001",
+          "company": "Sample Systems",
+          "company_start_date": "2023-01-01",
+          "company_end_date": null,
+          "current": true,
+          "summary": "Example summary for a current role focused on integrations, platform workflows, and partner enablement.",
+          "roles": [
+            {
+              "title": "Senior Product Manager",
+              "start_date": "2024-01-01",
+              "end_date": null,
+              "accomplishments": [
+                "Defined an example roadmap for partner-facing API improvements.",
+                "Coordinated an example cross-functional launch for a workflow automation feature."
+              ]
+            }
+          ]
         }
       },
       "ExperienceRole": {
         "type": "object",
+        "description": "One role held within an experience entry.",
         "required": [
           "title",
           "start_date",
@@ -418,12 +728,14 @@
         "properties": {
           "title": {
             "type": "string",
-            "example": "Product Manager"
+            "description": "Role title held during the experience.",
+            "example": "Senior Product Manager"
           },
           "start_date": {
             "type": "string",
             "format": "date",
-            "example": "2022-01-01"
+            "description": "Date when the role started.",
+            "example": "2024-01-01"
           },
           "end_date": {
             "type": [
@@ -431,22 +743,35 @@
               "null"
             ],
             "format": "date",
-            "example": "2023-05-31"
+            "description": "Date when the role ended, or `null` if it is current.",
+            "example": null
           },
           "accomplishments": {
             "type": "array",
+            "description": "Representative accomplishments or responsibilities for the role.",
             "items": {
-              "type": "string"
+              "type": "string",
+              "description": "One accomplishment or responsibility."
             },
             "example": [
-              "Led product strategy and roadmap for third-party API integrations, expanding partner connectivity and platform capability.",
-              "Scaled ingestion infrastructure supporting 10% growth in record processing volume within six months."
+              "Defined an example roadmap for partner-facing API improvements.",
+              "Coordinated an example cross-functional launch for a workflow automation feature."
             ]
           }
+        },
+        "example": {
+          "title": "Senior Product Manager",
+          "start_date": "2024-01-01",
+          "end_date": null,
+          "accomplishments": [
+            "Defined an example roadmap for partner-facing API improvements.",
+            "Coordinated an example cross-functional launch for a workflow automation feature."
+          ]
         }
       },
       "ProjectSummary": {
         "type": "object",
+        "description": "Summary view of a project returned by the list endpoint.",
         "required": [
           "id",
           "name",
@@ -455,81 +780,140 @@
         "properties": {
           "id": {
             "type": "string",
-            "example": "proj_001"
+            "description": "Stable identifier for the project.",
+            "example": "project_example_001"
           },
           "name": {
             "type": "string",
-            "example": "Empire"
+            "description": "Project name shown in the portfolio.",
+            "example": "Project Atlas"
           },
           "summary": {
             "type": "string",
-            "example": "Lightweight web app for groups to play the party game Empire on mobile devices."
+            "description": "Short summary of what the project is or does.",
+            "example": "Example summary for a customer-facing workflow automation product."
           }
+        },
+        "example": {
+          "id": "project_example_001",
+          "name": "Project Atlas",
+          "summary": "Example summary for a customer-facing workflow automation product."
+        }
+      },
+      "ProjectLinks": {
+        "type": "object",
+        "description": "External links associated with a project.",
+        "properties": {
+          "github": {
+            "type": "string",
+            "format": "uri",
+            "description": "Repository URL for the project, when available.",
+            "example": "https://example.com/project-atlas/repository"
+          },
+          "live": {
+            "type": "string",
+            "format": "uri",
+            "description": "Live deployment or demo URL for the project, when available.",
+            "example": "https://example.com/project-atlas"
+          },
+          "details": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL to a page with additional project details.",
+            "example": "https://example.com/projects/project-atlas"
+          }
+        },
+        "example": {
+          "github": "https://example.com/project-atlas/repository",
+          "live": "https://example.com/project-atlas",
+          "details": "https://example.com/projects/project-atlas"
         }
       },
       "Project": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ProjectSummary"
+        "type": "object",
+        "description": "Full project record returned by the detail endpoint.",
+        "required": [
+          "id",
+          "name",
+          "summary",
+          "description",
+          "links"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Stable identifier for the project.",
+            "example": "project_example_001"
           },
-          {
-            "type": "object",
-            "required": [
-              "description",
-              "links"
-            ],
-            "properties": {
-              "description": {
-                "type": "string",
-                "example": "Empire is a lightweight web app built for mobile-friendly party gameplay, created as an AI-assisted product build and deployed on Vercel."
-              },
-              "tags": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "example": [
-                  "Web App",
-                  "OpenAI Codex",
-                  "Vercel",
-                  "AI-Assisted Dev"
-                ]
-              },
-              "links": {
-                "type": "object",
-                "properties": {
-                  "github": {
-                    "type": "string",
-                    "format": "uri"
-                  },
-                  "live": {
-                    "type": "string",
-                    "format": "uri"
-                  },
-                  "details": {
-                    "type": "string",
-                    "format": "uri"
-                  }
-                }
-              }
-            }
+          "name": {
+            "type": "string",
+            "description": "Project name shown in the portfolio.",
+            "example": "Project Atlas"
+          },
+          "summary": {
+            "type": "string",
+            "description": "Short summary of what the project is or does.",
+            "example": "Example summary for a customer-facing workflow automation product."
+          },
+          "description": {
+            "type": "string",
+            "description": "Longer description used on the project detail view.",
+            "example": "Example longer description showing the kind of detail the endpoint can return for a single project."
+          },
+          "tags": {
+            "type": "array",
+            "description": "Tags used to categorize the project.",
+            "items": {
+              "type": "string",
+              "description": "One project tag."
+            },
+            "example": [
+              "Workflow automation",
+              "API integration",
+              "Example tag"
+            ]
+          },
+          "links": {
+            "$ref": "#/components/schemas/ProjectLinks"
           }
-        ]
+        },
+        "example": {
+          "id": "project_example_001",
+          "name": "Project Atlas",
+          "summary": "Example summary for a customer-facing workflow automation product.",
+          "description": "Example longer description showing the kind of detail the endpoint can return for a single project.",
+          "tags": [
+            "Workflow automation",
+            "API integration",
+            "Example tag"
+          ],
+          "links": {
+            "github": "https://example.com/project-atlas/repository",
+            "live": "https://example.com/project-atlas",
+            "details": "https://example.com/projects/project-atlas"
+          }
+        }
       },
       "Availability": {
         "type": "object",
+        "description": "Current availability state for the candidate.",
         "required": [
           "status"
         ],
         "properties": {
           "status": {
             "type": "string",
+            "description": "Availability status string used by the client application.",
             "example": "open_to_opportunities"
           }
+        },
+        "example": {
+          "status": "open_to_opportunities"
         }
       },
       "ResumeExperience": {
         "type": "object",
+        "description": "Resume-friendly experience entry returned from the structured resume endpoint.",
         "required": [
           "company",
           "company_start_date",
@@ -538,32 +922,59 @@
         ],
         "properties": {
           "company": {
-            "type": "string"
+            "type": "string",
+            "description": "Company or organization name for the experience entry.",
+            "example": "Sample Systems"
           },
           "company_start_date": {
             "type": "string",
-            "format": "date"
+            "format": "date",
+            "description": "Date when the candidate started working with the company.",
+            "example": "2023-01-01"
           },
           "company_end_date": {
             "type": [
               "string",
               "null"
             ],
-            "format": "date"
+            "format": "date",
+            "description": "Date when the candidate stopped working with the company, or `null` if it is current.",
+            "example": null
           },
           "current": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Whether this experience entry represents a current company.",
+            "example": true
           },
           "roles": {
             "type": "array",
+            "description": "Roles held within this company experience.",
             "items": {
               "$ref": "#/components/schemas/ExperienceRole"
             }
           }
+        },
+        "example": {
+          "company": "Sample Systems",
+          "company_start_date": "2023-01-01",
+          "company_end_date": null,
+          "current": true,
+          "roles": [
+            {
+              "title": "Senior Product Manager",
+              "start_date": "2024-01-01",
+              "end_date": null,
+              "accomplishments": [
+                "Defined an example roadmap for partner-facing API improvements.",
+                "Coordinated an example cross-functional launch for a workflow automation feature."
+              ]
+            }
+          ]
         }
       },
       "Resume": {
         "type": "object",
+        "description": "Structured resume response returned when `format=json` is requested.",
         "required": [
           "name",
           "title",
@@ -572,39 +983,86 @@
         ],
         "properties": {
           "name": {
-            "type": "string"
+            "type": "string",
+            "description": "Display name shown on the resume.",
+            "example": "Example Candidate"
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "description": "Primary title shown on the resume.",
+            "example": "Senior Product Manager"
           },
           "experience": {
             "type": "array",
+            "description": "Experience entries included in the structured resume.",
             "items": {
               "$ref": "#/components/schemas/ResumeExperience"
             }
           },
           "skills": {
             "type": "array",
+            "description": "Core skills highlighted on the resume.",
             "items": {
-              "type": "string"
-            }
+              "type": "string",
+              "description": "One skill or competency."
+            },
+            "example": [
+              "API strategy",
+              "Partner integrations",
+              "Product discovery"
+            ]
           }
+        },
+        "example": {
+          "name": "Example Candidate",
+          "title": "Senior Product Manager",
+          "experience": [
+            {
+              "company": "Sample Systems",
+              "company_start_date": "2023-01-01",
+              "company_end_date": null,
+              "current": true,
+              "roles": [
+                {
+                  "title": "Senior Product Manager",
+                  "start_date": "2024-01-01",
+                  "end_date": null,
+                  "accomplishments": [
+                    "Defined an example roadmap for partner-facing API improvements.",
+                    "Coordinated an example cross-functional launch for a workflow automation feature."
+                  ]
+                }
+              ]
+            }
+          ],
+          "skills": [
+            "API strategy",
+            "Partner integrations",
+            "Product discovery"
+          ]
         }
       },
       "ResumePdf": {
         "type": "object",
+        "description": "Response returned when `format=pdf` is requested.",
         "required": [
           "url"
         ],
         "properties": {
           "url": {
             "type": "string",
-            "format": "uri"
+            "format": "uri",
+            "description": "Absolute URL to a downloadable PDF version of the resume.",
+            "example": "https://example.com/resume/example-candidate.pdf"
           }
+        },
+        "example": {
+          "url": "https://example.com/resume/example-candidate.pdf"
         }
       },
       "ContactRequest": {
         "type": "object",
+        "description": "Payload used to submit a contact request.",
         "required": [
           "name",
           "email",
@@ -613,22 +1071,37 @@
         ],
         "properties": {
           "name": {
-            "type": "string"
+            "type": "string",
+            "description": "Name of the person submitting the request.",
+            "example": "Avery Lee"
           },
           "email": {
             "type": "string",
-            "format": "email"
+            "format": "email",
+            "description": "Email address used for follow-up.",
+            "example": "avery.lee@example.com"
           },
           "company": {
-            "type": "string"
+            "type": "string",
+            "description": "Company or organization associated with the request.",
+            "example": "Example Ventures"
           },
           "message": {
-            "type": "string"
+            "type": "string",
+            "description": "Message content submitted through the contact form.",
+            "example": "I would love to schedule time to talk about a product leadership role."
           }
+        },
+        "example": {
+          "name": "Avery Lee",
+          "email": "avery.lee@example.com",
+          "company": "Example Ventures",
+          "message": "I would love to schedule time to talk about a product leadership role."
         }
       },
       "ContactResponse": {
         "type": "object",
+        "description": "Acknowledgement returned after a contact request is accepted.",
         "required": [
           "id",
           "status"
@@ -636,16 +1109,23 @@
         "properties": {
           "id": {
             "type": "string",
-            "example": "contact_xxx123"
+            "description": "Identifier assigned to the submitted contact request.",
+            "example": "contact_example_001"
           },
           "status": {
             "type": "string",
+            "description": "Processing state for the submitted request.",
             "example": "received"
           }
+        },
+        "example": {
+          "id": "contact_example_001",
+          "status": "received"
         }
       },
       "Error": {
         "type": "object",
+        "description": "Standard error payload returned by the API.",
         "required": [
           "code",
           "message"
@@ -653,22 +1133,35 @@
         "properties": {
           "code": {
             "type": "string",
+            "description": "Machine-readable error code.",
             "example": "BAD_REQUEST"
           },
           "message": {
             "type": "string",
-            "example": "Invalid request body"
+            "description": "Human-readable explanation of the error.",
+            "example": "The request payload is missing a required field."
           }
+        },
+        "example": {
+          "code": "BAD_REQUEST",
+          "message": "The request payload is missing a required field."
         }
       },
       "ErrorResponse": {
         "type": "object",
+        "description": "Wrapper object for API errors.",
         "required": [
           "error"
         ],
         "properties": {
           "error": {
             "$ref": "#/components/schemas/Error"
+          }
+        },
+        "example": {
+          "error": {
+            "code": "BAD_REQUEST",
+            "message": "The request payload is missing a required field."
           }
         }
       }
