@@ -1,33 +1,41 @@
 ---
 title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+description: 'Overview of the Candidate Profile API and how to work with its resources'
 ---
-
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
 
 ## Welcome
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
-
 <Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
+  title="Candidate Profile OpenAPI spec"
+  icon="code"
+  href="/api-reference/openapi.json"
 >
-  View the OpenAPI specification file
+  Review the source definition that drives the interactive endpoint reference.
 </Card>
 
-## Authentication
+## Base URLs
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+The API currently exposes two server targets:
 
-```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
+```bash Local development
+http://localhost:3000
 ```
+
+```bash Production
+https://api.jonahanderson.me
+```
+
+## Resources
+
+The current API surface is grouped into six resource areas:
+
+- `Candidate` for the top-level profile payload.
+- `Experience` for listing roles and retrieving a single experience entry.
+- `Projects` for project summaries and full project details.
+- `Availability` for current status and readiness.
+- `Resume` for structured resume data or a PDF link.
+- `Contact` for inbound contact requests.
+
+## Responses
+
+All endpoint details, parameters, and schemas are generated directly from the OpenAPI file, so updating the spec will update the rendered reference pages that use the `openapi` frontmatter.
