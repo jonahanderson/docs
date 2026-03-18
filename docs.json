@@ -76,8 +76,8 @@
     ],
     "primary": {
       "type": "button",
-      "label": "Production API",
-      "href": "https://api.jonahanderson.me"
+      "label": "Portfolio Site",
+      "href": "https://jonahanderson.me"
     }
   },
   "contextual": {
