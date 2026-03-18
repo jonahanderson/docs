@@ -71,13 +71,18 @@
     "links": [
       {
         "label": "GitHub",
-        "href": "https://github.com/jonahanderson/docs"
+        "href": "https://github.com/jonahanderson"
       }
     ],
     "primary": {
       "type": "button",
       "label": "Portfolio Site",
       "href": "https://jonahanderson.me"
+    }
+  },
+  "integrations": {
+    "telemetry": {
+      "enabled": false
     }
   },
   "contextual": {
@@ -94,8 +99,8 @@
   },
   "footer": {
     "socials": {
-      "website": "https://api.jonahanderson.me",
-      "github": "https://github.com/jonahanderson/docs"
+      "website": "https://jonahanderson.me",
+      "github": "https://github.com/jonahanderson"
     }
   }
 }
