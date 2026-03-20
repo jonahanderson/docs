@@ -16,6 +16,7 @@
         "groups": [
           {
             "group": "Overview",
+            "icon": "book-open",
             "pages": [
               "index",
               "api-reference/introduction"
@@ -23,6 +24,7 @@
           },
           {
             "group": "Authentication",
+            "icon": "key",
             "pages": [
               "api-reference/authentication",
               "api-reference/endpoint/auth-token"
@@ -30,12 +32,14 @@
           },
           {
             "group": "Candidate",
+            "icon": "user",
             "pages": [
               "api-reference/endpoint/candidate"
             ]
           },
           {
             "group": "Experience",
+            "icon": "briefcase",
             "pages": [
               "api-reference/endpoint/experience-list",
               "api-reference/endpoint/experience-get"
@@ -43,6 +47,7 @@
           },
           {
             "group": "Projects",
+            "icon": "folder-open",
             "pages": [
               "api-reference/endpoint/projects-list",
               "api-reference/endpoint/project-get"
@@ -50,12 +55,14 @@
           },
           {
             "group": "Resume",
+            "icon": "file-text",
             "pages": [
               "api-reference/endpoint/resume"
             ]
           },
           {
             "group": "Contact",
+            "icon": "terminal",
             "pages": [
               "api-reference/endpoint/availability",
               "api-reference/endpoint/contact"
