@@ -3,7 +3,7 @@
   "info": {
     "title": "Candidate Profile API",
     "version": "1.0.0",
-    "description": "Personal candidate profile API published at api.jonahanderson.me. All example payloads in this spec are illustrative and do not represent live data."
+    "description": "Personal candidate profile API published at api.jonahanderson.me. Every endpoint except POST /auth/token requires bearer-token authentication. All example payloads in this spec are illustrative and do not represent live data."
   },
   "servers": [
     {
@@ -11,7 +11,15 @@
       "description": "Production"
     }
   ],
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
   "tags": [
+    {
+      "name": "Authentication"
+    },
     {
       "name": "Candidate"
     },
@@ -29,6 +37,60 @@
     }
   ],
   "paths": {
+    "/auth/token": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Request access token",
+        "description": "Returns a signed bearer token for the supplied email address and sends an auth-request email notification.",
+        "operationId": "createAuthToken",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthTokenRequest"
+              },
+              "examples": {
+                "tokenRequest": {
+                  "summary": "Request token",
+                  "value": {
+                    "email": "recruiter@example.com"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Signed bearer token issued.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthTokenResponse"
+                },
+                "examples": {
+                  "tokenIssued": {
+                    "summary": "Token issued",
+                    "description": "The server sends an auth-request email notification and returns a signed bearer token.",
+                    "value": {
+                      "access_token": "YOUR_TOKEN",
+                      "token_type": "Bearer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/AuthTokenBadRequest"
+          }
+        }
+      }
+    },
     "/candidate": {
       "get": {
         "tags": [
@@ -66,6 +128,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
           }
         }
       }
@@ -157,6 +222,9 @@
           },
           "400": {
             "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
           }
         }
       }
@@ -210,6 +278,9 @@
               }
             }
           },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
           "404": {
             "$ref": "#/components/responses/NotFound"
           }
@@ -255,6 +326,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
           }
         }
       }
@@ -304,6 +378,9 @@
               }
             }
           },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
           "404": {
             "$ref": "#/components/responses/NotFound"
           }
@@ -337,6 +414,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
           }
         }
       }
@@ -436,6 +516,9 @@
           },
           "400": {
             "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
           }
         }
       }
@@ -493,12 +576,23 @@
           },
           "400": {
             "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
           }
         }
       }
     }
   },
   "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "Signed bearer token returned by POST /auth/token. Send it in the Authorization header as `Bearer <token>`."
+      }
+    },
     "parameters": {
       "IdParam": {
         "in": "path",
@@ -543,6 +637,57 @@
           }
         }
       },
+      "AuthTokenBadRequest": {
+        "description": "Token request validation error.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "examples": {
+              "missingEmail": {
+                "summary": "Missing email",
+                "value": {
+                  "error": {
+                    "code": "BAD_REQUEST",
+                    "message": "email is required"
+                  }
+                }
+              },
+              "invalidEmail": {
+                "summary": "Invalid email",
+                "value": {
+                  "error": {
+                    "code": "BAD_REQUEST",
+                    "message": "email must be a valid email address"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Bearer token is missing, invalid, or altered.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "examples": {
+              "missingOrInvalidToken": {
+                "summary": "Valid bearer token required",
+                "value": {
+                  "error": {
+                    "code": "UNAUTHORIZED",
+                    "message": "A valid bearer token is required"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "NotFound": {
         "description": "Resource not found.",
         "content": {
@@ -567,6 +712,51 @@
       }
     },
     "schemas": {
+      "AuthTokenRequest": {
+        "type": "object",
+        "description": "Payload used to request a signed bearer token.",
+        "required": [
+          "email"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Email address used for the auth request notification and token issuance.",
+            "example": "recruiter@example.com"
+          }
+        },
+        "example": {
+          "email": "recruiter@example.com"
+        }
+      },
+      "AuthTokenResponse": {
+        "type": "object",
+        "description": "Signed bearer token returned after a successful auth request.",
+        "required": [
+          "access_token",
+          "token_type"
+        ],
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "description": "Signed bearer token to send on protected endpoints.",
+            "example": "YOUR_TOKEN"
+          },
+          "token_type": {
+            "type": "string",
+            "description": "Authorization scheme for the returned token.",
+            "enum": [
+              "Bearer"
+            ],
+            "example": "Bearer"
+          }
+        },
+        "example": {
+          "access_token": "YOUR_TOKEN",
+          "token_type": "Bearer"
+        }
+      },
       "Candidate": {
         "type": "object",
         "description": "Top-level candidate profile returned by the API.",

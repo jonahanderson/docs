@@ -1,26 +1,43 @@
 ---
 title: "Candidate Profile API"
-description: "Interactive API documentation for Jonah Anderson's candidate profile platform"
+description: "Interactive API documentation for Jonah Anderson's authenticated candidate profile platform"
 ---
 
 ## Overview
 
-This developer portal is generated from the OpenAPI spec in [openapi.json](/api-reference/openapi.json) and documents the endpoints that power Jonah Anderson's public candidate profile API.
+This developer portal documents the endpoints that power Jonah Anderson's public Candidate Profile API.
 
-<Card
-  title="Read the API introduction"
-  icon="book-open-cover"
-  href="/api-reference/introduction"
-  horizontal
->
-  Start with the environments, resource groups, and response shapes used across the API.
-</Card>
+<Columns cols={2}>
+  <Card
+    title="Set up authentication"
+    icon="key"
+    href="/api-reference/authentication"
+    horizontal
+  >
+    Learn the bearer-token flow and get the header you need for every protected endpoint.
+  </Card>
+  <Card
+    title="Read the API introduction"
+    icon="book-open-cover"
+    href="/api-reference/introduction"
+    horizontal
+  >
+    Start with the environments, resource groups, and response shapes used across the API.
+  </Card>
+</Columns>
 
 ## Resource areas
 
 The API is organized around the resources below.
 
 <Columns cols={2}>
+  <Card
+    title="Authentication"
+    icon="key"
+    href="/api-reference/endpoint/auth-token"
+  >
+    Request a signed bearer token before calling protected endpoints.
+  </Card>
   <Card
     title="Candidate"
     icon="user"
@@ -41,6 +58,13 @@ The API is organized around the resources below.
     href="/api-reference/endpoint/projects-list"
   >
     List featured projects and request full project details by id.
+  </Card>
+  <Card
+    title="Resume"
+    icon="file-text"
+    href="/api-reference/endpoint/resume"
+  >
+    Retrieve structured resume data or a PDF link.
   </Card>
   <Card
     title="Contact"

@@ -1,0 +1,102 @@
+---
+title: "Authentication workflow"
+sidebarTitle: "Workflow"
+description: "Request and use bearer tokens for the Candidate Profile API."
+---
+
+## Bearer-token authentication
+
+The Candidate Profile API uses bearer-token authentication. Every endpoint requires a valid bearer token except `POST /auth/token`.
+
+<Info>
+  Call `POST /auth/token` first. Then send `Authorization: Bearer YOUR_TOKEN` on every protected request.
+</Info>
+
+## Get a token
+
+<Steps>
+  <Step title="Send your email address">
+    Call `POST /auth/token` with the email address you want to use for the request.
+
+    ```json Request body
+    {
+      "email": "recruiter@example.com"
+    }
+    ```
+  </Step>
+  <Step title="Receive a signed token">
+    The server sends an auth-request email notification and returns a signed bearer token.
+
+    ```json Success response
+    {
+      "access_token": "YOUR_TOKEN",
+      "token_type": "Bearer"
+    }
+    ```
+  </Step>
+  <Step title="Use the token on protected endpoints">
+    Add the token to the `Authorization` header for every endpoint except `POST /auth/token`.
+
+    ```http Authorization header
+    Authorization: Bearer YOUR_TOKEN
+    ```
+  </Step>
+</Steps>
+
+## Example protected request
+
+```bash GET /candidate
+curl https://api.jonahanderson.me/candidate \
+  -H "Authorization: Bearer YOUR_TOKEN"
+```
+
+## Authentication errors
+
+If the bearer token is missing, invalid, or altered, protected endpoints return `401 Unauthorized`.
+
+```json 401 Unauthorized
+{
+  "error": {
+    "code": "UNAUTHORIZED",
+    "message": "A valid bearer token is required"
+  }
+}
+```
+
+## Token validation errors
+
+`POST /auth/token` validates the `email` field before the API issues a token.
+
+### Missing email
+
+Status: `400 Bad Request`
+
+```json Missing email error
+{
+  "error": {
+    "code": "BAD_REQUEST",
+    "message": "email is required"
+  }
+}
+```
+
+### Invalid email
+
+Status: `400 Bad Request`
+
+```json Invalid email error
+{
+  "error": {
+    "code": "BAD_REQUEST",
+    "message": "email must be a valid email address"
+  }
+}
+```
+
+<Card
+  title="POST /auth/token reference"
+  icon="key"
+  href="/api-reference/endpoint/auth-token"
+>
+  Review the generated schema, request body, and response examples for the token endpoint.
+</Card>

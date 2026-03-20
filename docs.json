@@ -22,6 +22,13 @@
             ]
           },
           {
+            "group": "Authentication",
+            "pages": [
+              "api-reference/authentication",
+              "api-reference/endpoint/auth-token"
+            ]
+          },
+          {
             "group": "Candidate",
             "pages": [
               "api-reference/endpoint/candidate"

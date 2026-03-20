@@ -21,10 +21,23 @@ The API currently exposes a single server target:
 https://api.jonahanderson.me
 ```
 
+## Authentication
+
+This API uses bearer-token authentication. Call `POST /auth/token` with an email address to receive a signed token, then send `Authorization: Bearer YOUR_TOKEN` on every protected request.
+
+<Card
+  title="Read the authentication guide"
+  icon="key"
+  href="/api-reference/authentication"
+>
+  See the token flow, example headers, and auth-related error responses.
+</Card>
+
 ## Resources
 
-The current API surface is grouped into five resource areas:
+The current API surface is grouped into six functional areas:
 
+- `Authentication` for requesting a signed bearer token.
 - `Candidate` for the top-level profile payload.
 - `Experience` for listing roles and retrieving a single experience entry.
 - `Projects` for project summaries and full project details.
