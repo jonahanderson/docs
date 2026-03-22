@@ -1,0 +1,79 @@
+---
+title: "Resources"
+description: "Reference for every resource exposed by the Candidate Profile MCP server."
+---
+
+## Overview
+
+All resources are registered under the `candidate-profile://profile` URI space and return `application/json`.
+
+Each resource response includes one `contents` entry with the resource URI, `mimeType`, and a pretty-printed JSON string in `text`.
+
+```json Example resource envelope
+{
+  "contents": [
+    {
+      "uri": "candidate-profile://profile/candidate",
+      "mimeType": "application/json",
+      "text": "{ ...pretty-printed JSON... }"
+    }
+  ]
+}
+```
+
+| Resource URI | Title | Purpose |
+| --- | --- | --- |
+| `candidate-profile://profile/candidate` | Candidate Profile | Top-level candidate profile data |
+| `candidate-profile://profile/experience` | Experience | All experience entries |
+| `candidate-profile://profile/projects` | Projects | Project summaries |
+| `candidate-profile://profile/availability` | Availability | Current availability status |
+| `candidate-profile://profile/resume/json` | Resume JSON | Structured resume data |
+| `candidate-profile://profile/resume/pdf` | Resume PDF Link | A JSON payload containing the resume PDF URL |
+
+## `candidate-profile://profile/candidate`
+
+Returns the top-level candidate profile.
+
+Use this resource when a client needs high-level context before it decides which deeper tools or resources to use next.
+
+Related REST endpoint: `GET /candidate`
+
+## `candidate-profile://profile/experience`
+
+Returns the full experience list.
+
+Use this resource when a client needs broad work-history context without making several tool calls first.
+
+Related REST endpoint: `GET /experience`
+
+## `candidate-profile://profile/projects`
+
+Returns project summaries.
+
+Use this resource when a client needs a project inventory before selecting a specific project for deeper lookup.
+
+Related REST endpoint: `GET /projects`
+
+## `candidate-profile://profile/availability`
+
+Returns the current availability status.
+
+Use this resource when availability needs to be checked alongside profile, experience, or project data.
+
+Related REST endpoint: `GET /availability`
+
+## `candidate-profile://profile/resume/json`
+
+Returns structured resume data in JSON form.
+
+Use this resource when a client needs resume content that can be analyzed, summarized, or reformatted.
+
+Related REST endpoint: `GET /resume?format=json`
+
+## `candidate-profile://profile/resume/pdf`
+
+Returns a JSON payload that contains the resume PDF URL.
+
+Use this resource when a client needs a shareable resume link instead of structured fields.
+
+Related REST endpoint: `GET /resume?format=pdf`

@@ -69,6 +69,39 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "MCP Server",
+        "groups": [
+          {
+            "group": "Overview",
+            "icon": "book-open",
+            "pages": [
+              "mcp/introduction"
+            ]
+          },
+          {
+            "group": "Resources",
+            "icon": "database",
+            "pages": [
+              "mcp/resources"
+            ]
+          },
+          {
+            "group": "Tools",
+            "icon": "terminal",
+            "pages": [
+              "mcp/tools"
+            ]
+          },
+          {
+            "group": "Interactions",
+            "icon": "message",
+            "pages": [
+              "mcp/interactions"
+            ]
+          }
+        ]
       }
     ]
   },

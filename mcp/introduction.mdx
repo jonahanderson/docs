@@ -1,0 +1,67 @@
+---
+title: "MCP Server"
+description: "Use the Candidate Profile platform through a remote Model Context Protocol server."
+---
+
+## Overview
+
+The Candidate Profile platform is available as a remote Model Context Protocol (MCP) server.
+
+Use the REST API when you want direct HTTP control from your application. Use the MCP server when you want an MCP-compatible client to discover candidate data, call tools, and work through multi-step prompts without hand-orchestrating each endpoint.
+
+```txt Remote MCP endpoint
+https://mcp.jonahanderson.me/mcp
+```
+
+<Info>
+  Add this endpoint to an MCP-compatible client. The server exposes resources, tools, and a reusable prompt through a single remote URL.
+</Info>
+
+## What the server exposes
+
+<CardGroup cols={2}>
+  <Card title="Resources" icon="database" href="/mcp/resources">
+    Read six JSON resources for candidate, experience, projects, availability, and resume data.
+  </Card>
+  <Card title="Tools" icon="terminal" href="/mcp/tools">
+    Call read tools for profile lookups and, when enabled, mutation tools for auth token and contact workflows.
+  </Card>
+  <Card title="Prompts and interactions" icon="message" href="/mcp/interactions">
+    Start with the built-in summary prompt or try example workflows that show how a client can use the server.
+  </Card>
+  <Card title="REST API reference" icon="code" href="/api-reference/introduction">
+    Compare the MCP surface with the underlying HTTP endpoints that power the same data model.
+  </Card>
+</CardGroup>
+
+## Availability notes
+
+- Every registered resource returns `application/json`.
+- Read tools are annotated as read-only and idempotent.
+- Mutation tools are optional and only appear when the deployment enables them.
+- The MCP server uses the same underlying candidate profile data as the REST API.
+
+## First interaction
+
+<Steps>
+  <Step title="Connect the endpoint">
+    Add `https://mcp.jonahanderson.me/mcp` to your MCP-compatible client.
+  </Step>
+  <Step title="Ask for a goal, not an endpoint">
+    Start with a task such as "Summarize Jonah Anderson for a backend platform engineering role and include current availability."
+  </Step>
+  <Step title="Let the client choose resources and tools">
+    A typical flow might inspect the profile, check availability, and then pull supporting experience or project details.
+
+    ```txt Typical tool flow
+    get_candidate
+    get_availability
+    list_experience({ "current": true })
+    list_projects
+    ```
+  </Step>
+</Steps>
+
+<Note>
+  If your client supports MCP prompts, `candidate_profile_summary` is the fastest first test. The full prompt reference and example workflows are in the [interactions page](/mcp/interactions).
+</Note>

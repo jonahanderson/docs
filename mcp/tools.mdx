@@ -1,0 +1,142 @@
+---
+title: "Tools"
+description: "Reference for every tool exposed by the Candidate Profile MCP server."
+---
+
+## Overview
+
+The server exposes read tools for profile lookups and optional mutation tools for workflows that create data.
+
+- Read tools are marked `readOnlyHint: true` and `idempotentHint: true`.
+- Mutation tools are marked `readOnlyHint: false` and `idempotentHint: false`.
+- All tools keep `destructiveHint: false` and `openWorldHint: true`.
+
+Every tool returns a text content item with pretty-printed JSON and the same data again in `structuredContent.data`.
+
+```json Example tool result envelope
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{ ...pretty-printed JSON... }"
+    }
+  ],
+  "structuredContent": {
+    "data": {}
+  }
+}
+```
+
+## Read tools
+
+### `get_candidate`
+
+Gets the top-level candidate profile.
+
+Input: none
+
+Related REST endpoint: `GET /candidate`
+
+### `list_experience`
+
+Lists experience entries. You can optionally filter the response to current or past roles.
+
+```json Input
+{
+  "current": true
+}
+```
+
+- `current` is optional.
+- Use `true` to request current roles only.
+- Use `false` to request past roles only.
+
+Related REST endpoint: `GET /experience`
+
+### `get_experience`
+
+Gets one experience entry by id.
+
+```json Input
+{
+  "id": "exp_dat"
+}
+```
+
+Related REST endpoint: `GET /experience/{id}`
+
+### `list_projects`
+
+Lists project summaries.
+
+Input: none
+
+Related REST endpoint: `GET /projects`
+
+### `get_project`
+
+Gets one project by id.
+
+```json Input
+{
+  "id": "proj_007"
+}
+```
+
+Related REST endpoint: `GET /projects/{id}`
+
+### `get_availability`
+
+Gets the current availability status.
+
+Input: none
+
+Related REST endpoint: `GET /availability`
+
+### `get_resume`
+
+Gets the resume as structured JSON or as a PDF link payload.
+
+```json Input
+{
+  "format": "json"
+}
+```
+
+- `format` accepts `json` or `pdf`.
+- The default is `json`.
+
+Related REST endpoint: `GET /resume`
+
+## Optional mutation tools
+
+<Warning>
+  These tools only appear when the deployment enables them. They are not guaranteed to be present in every MCP client session.
+</Warning>
+
+### `create_auth_token`
+
+Creates a demo bearer token for the Candidate Profile API and triggers the API's email notification flow.
+
+```json Input
+{
+  "email": "recruiter@example.com"
+}
+```
+
+Related REST endpoint: `POST /auth/token`
+
+### `create_contact`
+
+Submits a contact request through the Candidate Profile API.
+
+```json Input
+{
+  "name": "Hiring Manager",
+  "email": "manager@example.com",
+  "company": "Example Co",
+  "message": "Let's talk about platform engineering roles."
+}
+```
+
+Related REST endpoint: `POST /contact`

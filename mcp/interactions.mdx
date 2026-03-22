@@ -1,0 +1,112 @@
+---
+title: "Interactions"
+description: "Use the built-in prompt and try a few realistic MCP workflows."
+---
+
+## Built-in prompt
+
+The server registers one prompt template: `candidate_profile_summary`.
+
+It accepts one argument:
+
+```json Args
+{
+  "focus": "general"
+}
+```
+
+- `focus` accepts `general`, `experience`, `projects`, or `resume`.
+- The default is `general`.
+- The prompt asks the client to summarize Jonah Anderson's profile by using the available candidate tools.
+
+## Prompt output
+
+The prompt returns one user message. The message text changes slightly based on `focus`.
+
+<CodeGroup>
+```txt focus=general
+Summarize Jonah Anderson's candidate profile using the available candidate tools.
+```
+
+```txt focus=projects
+Summarize Jonah Anderson's projects using the available candidate tools.
+```
+</CodeGroup>
+
+<Note>
+  Prompt support varies by client. If your client does not surface MCP prompts directly, you can still ask the same task in plain language and let the client choose the tools.
+</Note>
+
+## Example interactions
+
+<AccordionGroup>
+  <Accordion title="Recruiter summary">
+    Start with a broad task instead of naming endpoints.
+
+    ```md Prompt
+    Summarize Jonah Anderson for a backend platform engineering role. Include current availability and the projects that best support the fit.
+    ```
+
+    A client will usually reach for a small set of read tools.
+
+    ```txt Typical tool flow
+    get_candidate
+    get_availability
+    list_projects
+    get_project({ "id": "<selected project id>" })
+    get_project({ "id": "<selected project id>" })
+    ```
+  </Accordion>
+
+  <Accordion title="Current experience only">
+    Ask for filtering when you want the response to stay tight.
+
+    ```md Prompt
+    Show Jonah Anderson's current roles only and explain the main responsibilities in plain language.
+    ```
+
+    ```txt Typical tool flow
+    list_experience({ "current": true })
+    ```
+  </Accordion>
+
+  <Accordion title="Resume handoff">
+    Use the server when you need structured resume data and a shareable PDF link.
+
+    ```md Prompt
+    Get Jonah Anderson's resume as structured data, then give me the PDF link as well.
+    ```
+
+    ```txt Typical tool flow
+    get_resume({ "format": "json" })
+    get_resume({ "format": "pdf" })
+    ```
+  </Accordion>
+
+  <Accordion title="Built-in MCP prompt">
+    If your client exposes MCP prompts, start with the registered summary template.
+
+    ```json Prompt args
+    {
+      "focus": "projects"
+    }
+    ```
+
+    That prompt asks the client to summarize Jonah Anderson's projects by using the available candidate tools.
+  </Accordion>
+</AccordionGroup>
+
+## What to expect from clients
+
+- Some clients inspect resources first. Others go straight to tools.
+- Clients may paraphrase results instead of showing raw JSON unless you ask for the original data.
+- Optional mutation tools may be absent when the deployment disables them.
+- `candidate-profile://profile/resume/pdf` returns JSON that contains a PDF URL. It does not stream the PDF file itself.
+
+<Card
+  title="Review all tools"
+  icon="terminal"
+  href="/mcp/tools"
+>
+  See every read tool, optional mutation tool, and related REST endpoint in one place.
+</Card>
